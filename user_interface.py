@@ -272,3 +272,30 @@ class UserInterface:
         # Position at the top-center of the screen
         text_rect = text_surface.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2))
         screen.blit(text_surface, text_rect)
+
+    def display_debug(self, screen, spaceship, planets, player):
+        font = pygame.font.Font(self.retro_font_path, 16)
+
+        debug_info = [
+            f"Player: Pos ({round(player.position.x)}, {round(player.position.y)}), "
+            f"Vel ({round(player.velocity.x)}, {round(player.velocity.y)}), Boost {round(player.fuel)}/{round(player.max_fuel)}",
+
+            f"Spaceship: Pos ({round(spaceship.position.x)}, {round(spaceship.position.y)}), "
+            f"Vel ({round(spaceship.velocity.x)}, {round(spaceship.velocity.y)}), "
+            f"Fuel {round(spaceship.fuel_amount)}/{round(spaceship.max_fuel)}, "
+            f"boost {round(spaceship.boost_cylinder_amount)}/{round(spaceship.boost_cylinder_capacity)}"
+        ]
+
+        # Add planet info
+        for i, planet in enumerate(planets):
+            debug_info.append(
+                f"Planet {i}: Pos ({round(planet.position.x)}, {round(planet.position.y)}), "
+                f"Mass {round(planet.mass)}, Radius {round(planet.radius)}, "
+                f"Discovered: {planet.discovered}"
+            )
+
+        # Render and display all debug info line by line
+        for idx, line in enumerate(debug_info):
+            text_surface = font.render(line, True, (255, 255, 255))
+            text_rect = text_surface.get_rect(topleft=(10, screen.get_height() // 2 + idx * 20))
+            screen.blit(text_surface, text_rect)

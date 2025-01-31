@@ -51,6 +51,12 @@ def handle_keys(player, planet, keys, spaceship, ui, camera, dt):
             exit_offset = pygame.math.Vector2(20, 0)  # Adjust the offset as needed
             exit_offset.rotate_ip(spaceship.angle)  # Rotate based on spaceship's angle
             player.position = spaceship.position + exit_offset
+
+        
+
+            
+
+        
      
     else:
         if (spaceship.position - player.position).length() < 25 and not player.in_ship:         
@@ -174,6 +180,8 @@ def main():
     discovery_message = None
     discovery_timer = 0  
 
+    show_debug = False
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -291,6 +299,13 @@ def main():
         if spaceship.oxygen_amount <= 0:
             #game over will go here
             pass
+
+        if keys[pygame.K_p]:
+            
+            show_debug = not show_debug
+
+        if show_debug:
+            ui.display_debug(screen, spaceship, planets, player)
 
         pygame.display.flip()
 
