@@ -257,18 +257,11 @@ def main():
         for planet in planets:
 
             if planet.discovered == False:
-                planet_screen_pos = camera.apply(planet)
-                px, py = int(planet_screen_pos.x), int(planet_screen_pos.y)
-                pr = camera.get_zoomed_value(planet.radius + 100)
-
-                # If any part of the planet is on-screen, mark it as discovered
-                if (
-                    (px + pr) >= 0 and (px - pr) <= WIDTH and
-                    (py + pr) >= 0 and (py - pr) <= HEIGHT
-                ):
+                if (player.position - planet.position).length() < (planet.radius + 200):
                     planet.discovered = True
                     discovery_message = "Map Updated"
                     discovery_timer = time.time()  # Start timer
+
 
         spaceship.draw(screen, camera)
 
@@ -286,14 +279,6 @@ def main():
             discovery_message = None  # Clear message after 3 seconds
 
         if time.time() - start_time < 3:
-            index = 0
-            for planet in planets:
-                if index >0:
-                    planet.discovered = False
-                    index += 1
-            
-
-
             screen.fill((0, 0, 0))
 
         if spaceship.oxygen_amount <= 0:
