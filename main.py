@@ -222,7 +222,7 @@ def main():
             #player boost bar 
             ui.draw_bar(player.fuel, player.max_fuel, 200, 0, ("left", "top"))
 
-            if time.time() - start_time < 3:
+            if time.time() - start_time < 5:
                 prompt_position = camera.apply(player) + pygame.math.Vector2(20, -20)
                 ui.draw_prompt("WASD to move", prompt_position, time)
 
@@ -278,6 +278,14 @@ def main():
             discovery_message = None  # Clear message after 3 seconds
 
         if time.time() - start_time < 3:
+            index = 0
+            for planet in planets:
+                if index >0:
+                    planet.discovered = False
+                    index += 1
+            
+
+
             screen.fill((0, 0, 0))
 
         if spaceship.oxygen_amount <= 0:
