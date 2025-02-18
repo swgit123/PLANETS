@@ -83,8 +83,8 @@ class Player(PhysicsObject):
 
 
     def handle_movement(self, planet, keys, spaceship, dt):
-        speed = 4000  # Base walking speed
-        jump_speed = 35000  # Base jump speed
+        speed = 80  # Base walking speed
+        jump_speed = 1000  # Base jump speed
 
         self.dt = dt
         tangential_vector = get_tangential_vector(self.position, planet.position)
@@ -93,18 +93,18 @@ class Player(PhysicsObject):
 
         if keys[pygame.K_a]:
             # Move left along the tangent
-            self.apply_force(tangential_vector * -speed * self.dt)  # Scale force by dt
+            self.apply_force(tangential_vector * -speed)  # Scale force by dt
         if keys[pygame.K_d]:
             # Move right along the tangent
-            self.apply_force(tangential_vector * speed * self.dt)  # Scale force by dt
+            self.apply_force(tangential_vector * speed)  # Scale force by dt
         if keys[pygame.K_s]:
             # Move down towards the planet
-            self.apply_force(normal_vector * -jump_speed * self.dt * 2)
+            self.apply_force(normal_vector * -jump_speed * 2)
 
         # Jump logic with fuel consumption
         if keys[pygame.K_w] and self.fuel >= self.jump_fuel_cost:
             # Only jump if fuel is available
-            self.apply_force(normal_vector * jump_speed * self.dt)  # Scale jump force by dt
+            self.apply_force(normal_vector * jump_speed)  # Scale jump force by dt
             self.fuel -= self.jump_fuel_cost  # Decrease fuel
             self.on_ground = False  # Ensure the player can't jump again until they land
 

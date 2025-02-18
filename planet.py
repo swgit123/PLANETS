@@ -5,7 +5,7 @@ import math
 import random
 from utilities import position_on_orbit
 from fuel_tanks import FuelTank
-import noise
+#import noise
 
 def draw_dotted_circle(surface, color, draw_pos, radius, dot_radius=2, num_dots=50):
     cx, cy = draw_pos
@@ -32,7 +32,7 @@ class Planet(PhysicsObject):
         self.num_fuel_tanks = random.randint(3, 7)  # Random number of fuel tanks
         self.fuel_tanks = self.generate_fuel_tanks()
 
-        self.discovered = False 
+        self.discovered = True
 
         
 

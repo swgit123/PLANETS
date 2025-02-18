@@ -8,7 +8,7 @@ from spaceship import Spaceship
 from user_interface import UserInterface
 import sys
 import time
-from procedural_generation import generate_planets
+from generate_system import generate_planets
 import time
 import math
 
@@ -16,8 +16,8 @@ import math
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 
-#WIDTH, HEIGHT = 1200, 900
-WIDTH, HEIGHT = 1920, 1080
+WIDTH, HEIGHT = 1600, 1000
+#WIDTH, HEIGHT = 1920, 1080
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("P L A N E T S")
@@ -154,8 +154,6 @@ def title_screen_loop():
 
 
 def main():
-    screen_width = 1200
-    screen_height = 900
     window_size = (WIDTH, HEIGHT)
     screen = pygame.display.set_mode(window_size)
     ui = UserInterface(screen)  
@@ -167,7 +165,7 @@ def main():
     clock = pygame.time.Clock()
     running = True
 
-    planets = generate_planets(num_planets=10, world_size=(6000, 6000))
+    planets = generate_planets(10, 500)
     player_x, player_y = spawn_on_planet(planets[0], 270)
     spaceship_x, spaceship_y = spawn_on_planet(planets[0], 270) 
     player = Player(player_x, player_y, mass=1, radius=2)
