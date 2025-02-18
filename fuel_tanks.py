@@ -11,7 +11,7 @@ class FuelTank:
     def draw(self, screen, camera):
         # Draw the fuel tank as a simple circle
         draw_pos = camera.apply(self)
-        pygame.draw.circle(screen, (250, 255, 255), (int(draw_pos.x), int(draw_pos.y)), camera.get_zoomed_value(self.radius), 1)
+        pygame.draw.circle(screen, (250, 255, 255), (int(draw_pos.x), int(draw_pos.y)), camera.get_zoomed_value(self.radius), 3)
 
     def refill(self, spaceship):
         spaceship.fuel_amount = min(spaceship.max_fuel, spaceship.fuel_amount + self.fuel_amount)  # Refill spaceship's fuel

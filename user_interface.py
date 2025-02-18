@@ -60,7 +60,7 @@ class UserInterface:
             fuel_ratio = capacity / max_capacity
             
             pygame.draw.rect(self.screen, (255, 255, 255), (x, y, bar_width * fuel_ratio, bar_height))
-            pygame.draw.rect(self.screen, (255, 255, 255), (x, y, bar_width, bar_height), 2)
+            pygame.draw.rect(self.screen, (255, 255, 255), (x, y, bar_width, bar_height), 3)
 
  
 
@@ -154,7 +154,7 @@ class UserInterface:
         # Create a mini-map surface
         map_surface = pygame.Surface((map_width, map_height))
         map_surface.fill((0, 0, 0))  # Black background
-        pygame.draw.rect(map_surface, (255, 255, 255), (0, 0, map_width, map_height), 1)  # Border
+        pygame.draw.rect(map_surface, (255, 255, 255), (0, 0, map_width, map_height), 3)  # Border
 
         # Define the scale (reduce the game world size to fit the map)
         world_width, world_height = 6000, 6000  # Approximate game world size
@@ -205,7 +205,7 @@ class UserInterface:
         pygame.draw.polygon(map_surface, (255, 255, 255), transformed_points, 1)  # White outline for spaceship
 
         # Draw the player on the map (always centered)
-        pygame.draw.circle(map_surface, (255, 255, 255), (map_width // 2, map_height // 2), 2)  # White dot for player
+        pygame.draw.circle(map_surface, (255, 255, 255), (map_width // 2, map_height // 2), 1)  # White dot for player
 
         # Determine UI placement
         x, y = self.calculate_position(map_width, map_height, ("right", "top"), 0, 0)
@@ -251,7 +251,7 @@ class UserInterface:
         self.draw_arrow(screen, arrow_x, arrow_y, direction, arrow_size, arrow_thickness)
 
 
-    def draw_arrow(self, screen, x, y, direction, size=10, thickness=2):
+    def draw_arrow(self, screen, x, y, direction, size=10, thickness=3):
         color = (255, 255, 255)  # White arrow
 
         if direction == "left":

@@ -16,7 +16,8 @@ import math
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 
-WIDTH, HEIGHT = 1200, 900
+#WIDTH, HEIGHT = 1200, 900
+WIDTH, HEIGHT = 1920, 1080
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("P L A N E T S")
@@ -155,7 +156,7 @@ def title_screen_loop():
 def main():
     screen_width = 1200
     screen_height = 900
-    window_size = (screen_width, screen_height)
+    window_size = (WIDTH, HEIGHT)
     screen = pygame.display.set_mode(window_size)
     ui = UserInterface(screen)  
     
@@ -185,6 +186,8 @@ def main():
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
                 running = False
 
         dt = clock.tick(60) / 1000.0
@@ -282,8 +285,8 @@ def main():
             screen.fill((0, 0, 0))
 
         if spaceship.oxygen_amount <= 0:
-            #game over will go here
-            pass
+            ui.show_message("Oxygen Depleted. Game Over")
+            main()  # Restart the game
 
         if keys[pygame.K_p]:
             
@@ -302,35 +305,5 @@ if __name__ == "__main__":
     pygame.init()
     main()
 
-
-#todo
-
-#1: DONE
-#give ship a second bar representing total fuel, eg, total fuel could be 1000, but boost can only hold 150
-#if ship runs out of fuel the boost bar could only fill up part way 
-
-#3: DONE
-#add a way to collect fuel
-#examples could be enemies that you fight on foot 
-#fuel canisters which you can pick up 
-
-
-#2: TO DO
-#add physical map object, map only shows after picking it up
-
-
-#4: TO DO 
-#give the spaceship an oxygen bar, only regens when inside a planets atmosphere
-#game over when it reaches zero 
-
-#5: TO DO
-#Option to hold down a key to give up
-#restarts the game 
-
-#6: TO DO
-#Proc gen system for generating planets 
-
-#7: TO DO
-#Minimap scrolls.
 
 

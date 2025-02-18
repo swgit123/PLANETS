@@ -17,7 +17,7 @@ class Spaceship(PhysicsObject):
         self.particles = []  # List to store particles
 
         #Fuel system
-        self.fuel_amount = 500
+        self.fuel_amount = 50
         self.max_fuel = 1000
         self.boost_cylinder_capacity = 150  # Maximum fuel capacity
         self.boost_cylinder_amount = 0
@@ -191,7 +191,7 @@ class Spaceship(PhysicsObject):
         transformed_points = [(int(p[0]), int(p[1])) for p in transformed_points]
 
         # Draw the spaceship
-        pygame.draw.polygon(screen, (255, 255, 255), transformed_points, 1)
+        pygame.draw.polygon(screen, (255, 255, 255), transformed_points, 3)
 
         # Draw particles
         for particle in self.particles:

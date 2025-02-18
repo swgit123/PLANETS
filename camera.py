@@ -37,8 +37,13 @@ class Camera:
         self.offset += (new_offset - self.offset) * follow_speed  # Smooth transition
 
     def apply(self, entity):
-        position = (entity.position - self.offset) * self.zoom
+        if isinstance(entity, pygame.math.Vector2):  # Handle raw Vector2 points
+            position = (entity - self.offset) * self.zoom
+        else:
+            position = (entity.position - self.offset) * self.zoom  # Handle objects with .position
+
         return position
+        
 
     def adjust_zoom(self, amount):
         self.zoom += amount

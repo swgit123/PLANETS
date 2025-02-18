@@ -79,7 +79,7 @@ class Player(PhysicsObject):
         # Draw the current player position
         draw_pos = camera.apply(self)
         radius = camera.get_zoomed_value(self.radius)
-        pygame.draw.circle(screen, (255, 255, 255), (int(draw_pos.x), int(draw_pos.y)), radius, 1)
+        pygame.draw.circle(screen, (255, 255, 255), (int(draw_pos.x), int(draw_pos.y)), radius, 3)
 
 
     def handle_movement(self, planet, keys, spaceship, dt):

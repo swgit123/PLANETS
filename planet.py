@@ -1,9 +1,11 @@
+
 import pygame
 from physics_object import PhysicsObject
 import math 
 import random
 from utilities import position_on_orbit
 from fuel_tanks import FuelTank
+import noise
 
 def draw_dotted_circle(surface, color, draw_pos, radius, dot_radius=2, num_dots=50):
     cx, cy = draw_pos
@@ -31,6 +33,8 @@ class Planet(PhysicsObject):
         self.fuel_tanks = self.generate_fuel_tanks()
 
         self.discovered = False 
+
+        
 
     def generate_trees(self):
         trees = []
@@ -65,7 +69,7 @@ class Planet(PhysicsObject):
         trunk_end = base + pygame.math.Vector2(trunk_height * math.cos(angle), trunk_height * math.sin(angle))
 
         # Draw the trunk
-        pygame.draw.line(screen, (255, 255, 255), (base.x, base.y), (trunk_end.x, trunk_end.y), 1)
+        pygame.draw.line(screen, (255, 255, 255), (base.x, base.y), (trunk_end.x, trunk_end.y), 3)
 
         # Draw branches
         num_branch_levels = 6  # Increase for more density
@@ -87,7 +91,7 @@ class Planet(PhysicsObject):
                 branch_length * math.cos(left_branch_angle),
                 branch_length * math.sin(left_branch_angle)
             )
-            pygame.draw.line(screen, (255, 255, 255), (branch_base.x, branch_base.y), (left_branch_end.x, left_branch_end.y), 1)
+            pygame.draw.line(screen, (255, 255, 255), (branch_base.x, branch_base.y), (left_branch_end.x, left_branch_end.y), 3)
 
             # Right branch (angled downward relative to trunk)
             right_branch_angle = angle + math.pi - branch_angle_offset  # Adjusted to tilt downward
@@ -95,19 +99,38 @@ class Planet(PhysicsObject):
                 branch_length * math.cos(right_branch_angle),
                 branch_length * math.sin(right_branch_angle)
             )
-            pygame.draw.line(screen, (255, 255, 255), (branch_base.x, branch_base.y), (right_branch_end.x, right_branch_end.y), 1)
+            pygame.draw.line(screen, (255, 255, 255), (branch_base.x, branch_base.y), (right_branch_end.x, right_branch_end.y), 3)
 
     def draw(self, screen, transparent_surface, camera, time, player_position):
         draw_pos = camera.apply(self)
         radius = camera.get_zoomed_value(self.radius)
         
         # Draw the planet
-        pygame.draw.circle(screen, (255, 255, 255), (int(draw_pos.x), int(draw_pos.y)), radius, 1)
+        pygame.draw.circle(screen, (255, 255, 255), (int(draw_pos.x), int(draw_pos.y)), radius, 3)
            
         # Calculate distance between the player and the planet's center
         distance_to_player = (self.position - player_position).length()
         # Check if the player is inside the atmosphere
-        if distance_to_player <= (self.radius + 100):
+        if distance_to_player <= (self.radius + 100) or True:
+
+            # atmosphere_radius = radius + camera.get_zoomed_value(100)
+
+            # # Draw atmosphere with a fading dark edge
+            # base_color = (135, 206, 250)  # Sky blue base
+            # for i in range(1, 15):  # More steps = smoother transition
+            #     fade_factor = i / 15  # Increases from 0 to 1
+            #     darkened_color = (
+            #         int(base_color[0] * (1 - fade_factor * 0.6)),  # Reduce brightness towards edge
+            #         int(base_color[1] * (1 - fade_factor * 0.6)),
+            #         int(base_color[2] * (1 - fade_factor * 0.6)),
+            #         80  # Constant alpha to keep visibility
+            #     )
+            #     pygame.draw.circle(
+            #         transparent_surface,
+            #         darkened_color,
+            #         (int(draw_pos.x), int(draw_pos.y)),
+            #         int(atmosphere_radius * (1 - fade_factor * 0.05))
+            #     )
 
             pygame.draw.circle(
                 transparent_surface,
@@ -131,6 +154,3 @@ class Planet(PhysicsObject):
         else: 
             # Draw dotted circle for atmosphere
             draw_dotted_circle(screen, (255, 255, 255), (int(draw_pos.x), int(draw_pos.y)), radius + camera.get_zoomed_value(100), dot_radius=1, num_dots=150)
-
-
-                    
