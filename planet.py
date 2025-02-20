@@ -32,7 +32,7 @@ class Planet(PhysicsObject):
         self.num_fuel_tanks = random.randint(3, 7)  # Random number of fuel tanks
         self.fuel_tanks = self.generate_fuel_tanks()
 
-        self.discovered = True
+        self.discovered = False
 
         
 

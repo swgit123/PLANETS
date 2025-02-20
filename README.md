@@ -15,3 +15,5 @@ fuel canisters which you can pick up
 -planets only show on the minimap once the player has visited them
 
 
+-some atmospheres no oxygen 
+-thinner atmospheres 

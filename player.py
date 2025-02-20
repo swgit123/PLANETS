@@ -83,8 +83,8 @@ class Player(PhysicsObject):
 
 
     def handle_movement(self, planet, keys, spaceship, dt):
-        speed = 80  # Base walking speed
-        jump_speed = 1000  # Base jump speed
+        speed = 50  # Base walking speed
+        jump_speed = 300  # Base jump speed
 
         self.dt = dt
         tangential_vector = get_tangential_vector(self.position, planet.position)

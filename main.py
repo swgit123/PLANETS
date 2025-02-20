@@ -200,7 +200,7 @@ def main():
         camera_target = player if not player.in_ship else spaceship
 
         # Update the camera
-        camera.update(camera_target)
+        camera.update(camera_target.position)
 
         # Adjust zoom based on the target's distance to the nearest planet
         distance, closest_planet = distance_to_nearest_planet(camera_target, planets)
@@ -292,6 +292,9 @@ def main():
 
         if show_debug:
             ui.display_debug(screen, spaceship, planets, player)
+            camera.mode = "free"
+        else:
+            camera.mode = "follow"
 
         pygame.display.flip()
 
